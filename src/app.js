@@ -6,10 +6,10 @@ Vue.component('item', {
   ],
   template: `
     <li class="item">
-      <div class="item-fav-icon"> {{ item.isFav ? "😊" : "☹️" }} </div>
+      <div class="item-fav-icon">{{ item.isFav ? "😊" : "☹️" }}</div>
       <img class="item-image" v-bind:src="item.imageSrc" alt="">
-      <div> {{ item.brand }} </div>
-      <div class="item-color"> {{ item.color }} </div>
+      <div>{{ item.brand }}</div>
+      <div class="item-color">{{ item.color }}</div>
     </li>
   `
 })
