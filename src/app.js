@@ -1,9 +1,12 @@
 // <item>
 
 Vue.component('item', {
-  props: [
-    'item'
-  ],
+  props: {
+    item: {
+      required: true,
+      type: Object
+    }
+  },
   template: `
     <li class="item">
       <div class="item-fav-icon">{{ item.isFav ? "😊" : "☹️" }}</div>
@@ -41,19 +44,6 @@ Vue.component('items', {
         { id: 5, brand: 'Louis Vuitton', color: 'Pink', imageSrc: '/assets/girolata.png', isFav: false }
       ]
     }
-  },
-  computed: {
-    reversedMessage () {
-      return this.message.split('').reverse().join('')
-    }
-  },
-  methods: {
-    toggleFav () {
-      console.log("called toggleFav")
-    }  
-  },
-  created () {
-    console.log("message is: " + this.message)
   }
 })
 
