@@ -1,17 +1,3 @@
-Vue.component('item', {
-  props: [
-    'item'
-  ],
-  template: `
-  <li class="item">
-    <div class="item-fav-icon"> {{ item.isFav ? "😊" : "☹️" }} </div>
-    <img class="item-image" v-bind:src="item.imageSrc" alt="">
-    <div> {{ item.brand }} </div>
-    <div class="item-color"> {{ item.color }} </div>
-  </li>
-  `
-})
-
 var app = new Vue({
   el: '#app',
   template: `
@@ -45,11 +31,24 @@ var app = new Vue({
   methods: {
     toggleFav: function () {
       console.log("called toggleFav")
-
     }
   },
   created: function () {
     console.log("message is: " + this.message)
   }
 
+})
+// Components
+Vue.component('item', {
+  props: [
+    'item'
+  ],
+  template: `
+  <li class="item">
+    <div class="item-fav-icon"> {{ item.isFav ? "😊" : "☹️" }} </div>
+    <img class="item-image" v-bind:src="item.imageSrc" alt="">
+    <div> {{ item.brand }} </div>
+    <div class="item-color"> {{ item.color }} </div>
+  </li>
+  `
 })
