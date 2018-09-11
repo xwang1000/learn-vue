@@ -4,6 +4,12 @@ body {
   background-color: #eee;
 }
 
+.list-title {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 .item-list {
   list-style: none;
   display: flex;

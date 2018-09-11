@@ -24,17 +24,23 @@ Vue.component('item', {
 // <items>
 
 Vue.component('items', {
+  props: {
+    listTitle: String
+  },
   template: `
-    <ul class="item-list">
-      <item 
-        class="item"
-        v-for="purse in purses"
-        :item="purse"
-        :clicked="toggleFav"
-        :key="purse.id"
-      >
-      </item>
-    </ul>
+    <div>
+      <p class="list-title">{{ listTitle }}</p>
+      <ul class="item-list">
+        <item 
+          class="item"
+          v-for="purse in purses"
+          :item="purse"
+          :clicked="toggleFav"
+          :key="purse.id"
+        >
+        </item>
+      </ul>
+    </div>
   `,
   data () {
     return {
@@ -63,10 +69,14 @@ Vue.component('items', {
 
 const app = new Vue({
   el: '#app',
+  data: {
+    name: "PURSES"
+  },
   template: `
     <div>
-      <p>PURSES</p>
-      <items></items>
+      <items :list-title="name"></items>
+      <items :list-title="name"></items>
+      <items :list-title="name"></items>      
     </div>
   `
 })
