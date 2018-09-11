@@ -13,7 +13,7 @@
       background-color: #eee;
     }
 
-    .items-list {
+    .item-list {
       list-style: none;
       display: flex;
       flex-direction: row;
@@ -23,12 +23,12 @@
     }
     
     @media (max-width: 600px) {
-      .items-list {
+      .item-list {
         align-items: center;
       }
     }
 
-    .items {
+    .item {
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       background-color: white;
@@ -42,7 +42,7 @@
       text-align: right;
     }
 
-    .items:hover {
+    .item:hover {
       cursor: pointer;
       transform: scale(1.03);
       transition: transform 0.1s ease;
@@ -62,32 +62,26 @@
 </head>
 <body>
   <div id="app">
-    <ul class="items-list">
-      <items 
-        class="items"
+    <ul class="item-list">
+      <item 
+        class="item"
         v-for="purse in purses"
-        v-bind:item="purse"
-        v-bind:key="purse.id"
+        :item="purse"
+        :key="purse.id"
+        @click="toggleFav()"
       >
-      </items>
+      </item>
     </ul>
   </div> 
 
   <script>
-    Vue.component('items', {
+    Vue.component('item', {
       props: [
         'item'
         ],
-      methods: {
-        toggleFav: function () {
-          this.isFav = !this.isFav
-          console.log(this.isFav)
-        }
-      },
       template: `
-      <li class="items" v-on:click="toggleFav">
-        <div class="item-fav-icon"> {{ item.isFav ? "😊" : "☹️"}} </div>
-        <!-- <div class="item-fav-icon"> {{ getFavIcon }} </div> -->
+      <li class="item">
+        <div class="item-fav-icon"> {{ item.isFav ? "😊" : "☹️" }} </div>
         <img class="item-image" v-bind:src="item.imageSrc" alt="">
         <div> {{ item.brand }} </div>
         <div class="item-color"> {{ item.color }} </div>
@@ -111,6 +105,12 @@
         computed: {
           reversedMessage: function () {
             return this.message.split('').reverse().join('')
+          }
+        },
+        methods: {
+          toggleFav: function () {
+            console.log("called toggleFav")
+
           }
         },
         created: function () {
