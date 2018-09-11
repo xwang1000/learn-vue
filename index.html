@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Closet 我的衣柜</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      background-color: #eee;
+    }
+
+    .items-list {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-left: 0;
+    }
+    
+    @media (max-width: 600px) {
+      .items-list {
+        align-items: center;
+      }
+    }
+
+    .items {
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: white;
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      max-width: 180px;
+    }
+
+    .item-fav-icon {
+      text-align: right;
+    }
+
+    .items:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      transition: transform 0.1s ease;
+    }
+
+    .item-image {
+      width: 100px;
+      height: auto;
+      margin: 10px;
+    }
+
+    .item-color {
+      text-transform: lowercase;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <ul class="items-list">
+      <items 
+        class="items"
+        v-for="purse in purses"
+        v-bind:item="purse"
+        v-bind:key="purse.id"
+      >
+      </items>
+    </ul>
+  </div> 
+
+  <script>
+    Vue.component('items', {
+      props: [
+        'item'
+        ],
+      computed: {
+        getFavIcon: function () {
+          return (this.isFav ? "😊" : "☹️")
+        }
+      },
+      methods: {
+        toggleFav: function () {
+          this.isFav = !this.isFav
+          console.log(this.isFav)
+        }
+      },
+      template: `
+      <li class="items" v-on:click="toggleFav">
+        <div class="item-fav-icon"> {{ item.isFav ? "😊" : "☹️"}} </div>
+        <!-- <div class="item-fav-icon"> {{ getFavIcon }} </div> -->
+        <img class="item-image" v-bind:src="item.imageSrc" alt="">
+        <div> {{ item.brand }} </div>
+        <div class="item-color"> {{ item.color }} </div>
+      </li>
+      `
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+          message: 'Buy a new purse',
+          purses: [
+            { id: 0, brand: 'Bao Bao', color: 'Classic Silver', imageSrc: '/assets/issey.jpeg', isFav: true},
+            { id: 1, brand: 'Longchamp', color: 'Grass Khaki', imageSrc: '/assets/longchamp.jpeg', isFav: false},
+            { id: 2, brand: 'Coach', color: 'Lychee Black', imageSrc: '/assets/coach.jpeg', isFav: true},
+            { id: 3, brand: 'Louis Vuitton', color: 'Shiny Nude', imageSrc: '/assets/alma.jpeg', isFav: true},
+            { id: 4, brand: 'Chanel', color: 'Black Fabric', imageSrc: '/assets/leboy.png', isFav: false},
+            { id: 5, brand: 'Louis Vuitton', color: 'Pink', imageSrc: '/assets/girolata.png', isFav: false}
+          ]
+        },
+        computed: {
+          reversedMessage: function () {
+            return this.message.split('').reverse().join('')
+          }
+        },
+        created: function () {
+          console.log("message is: " + this.message)
+        }
+      
+      })
+  </script>
+</body>
+</html>
