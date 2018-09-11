@@ -70,13 +70,16 @@ Vue.component('items', {
 const app = new Vue({
   el: '#app',
   data: {
-    name: "PURSES"
+    name1: "PURSES 包包",
+    name2: "DRESSES 裙子",
+    name3: "SHOES 鞋子"
   },
   template: `
     <div>
-      <items :list-title="name"></items>
-      <items :list-title="name"></items>
-      <items :list-title="name"></items>      
+      <h1 class="app-title">My Closet 我的衣柜</h1>
+      <items :list-title="name1"></items>
+      <items :list-title="name2"></items>
+      <items :list-title="name3"></items>      
     </div>
   `
 })
