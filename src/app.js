@@ -12,7 +12,8 @@ Vue.component('item', {
     }
   },
   template: `
-    <li class="item" :class="{'item--fav': item.isFav}" @click="clicked(item.id)">
+    <!-- testing color thief -->
+    <li class="item" :class="{'item--fav': item.isFav}" @click="clicked(item.id, item.imageSrc)">
       <div class="item-fav-icon">{{ item.isFav ? "😊" : "☹️" }}</div>
       <img class="item-image" v-bind:src="item.imageSrc" alt="">
       <div>{{ item.brand }}</div>
@@ -44,7 +45,12 @@ Vue.component('items', {
     </div>
   `,
   methods: {
-    toggleFav (ID) {
+    toggleFav (ID, imagePath) {
+      
+      //testing color theif
+      setImage(imagePath)
+      setColor(imagePath)
+
       this.list.forEach((listItem) => {
         if (listItem.id === ID) {
           listItem.isFav = !listItem.isFav
@@ -79,12 +85,12 @@ const app = new Vue({
       { id: 5, brand: 'Aritzia', color: 'playful yellow', imageSrc: '/assets/dress-yellow.png', isFav: false }
     ],
     shoes: [
-      { id: 0, brand: 'Valentino', color: 'lace white', imageSrc: '/assets/dress-white.png', isFav: true},
-      { id: 1, brand: 'Christian Dior', color: 'royal blue', imageSrc: '/assets/dress-blue.png', isFav: false },
-      { id: 2, brand: 'Chanel', color: 'dance black', imageSrc: '/assets/dress-black.png', isFav: true },
-      { id: 3, brand: 'Zara', color: 'indian red', imageSrc: '/assets/dress-red.png', isFav: true },
-      { id: 4, brand: 'H&M', color: 'bling bling', imageSrc: '/assets/dress-bling.png', isFav: false },
-      { id: 5, brand: 'Aritzia', color: 'playful yellow', imageSrc: '/assets/dress-yellow.png', isFav: false }
+      { id: 0, brand: 'Fendi', color: 'white carrson', imageSrc: '/assets/shoes-white.png', isFav: true},
+      { id: 1, brand: 'Steve Madden', color: 'royal blue', imageSrc: '/assets/shoes-blue.png', isFav: false },
+      { id: 2, brand: 'Forever 21', color: 'Kim Kardashian', imageSrc: '/assets/shoes-kim.png', isFav: true },
+      { id: 3, brand: 'Guess', color: 'Dangerous pump', imageSrc: '/assets/shoes-dangerous.png', isFav: true },
+      { id: 4, brand: 'Gucci', color: 'pink feather', imageSrc: '/assets/shoes-fefe.png', isFav: false },
+      { id: 5, brand: 'Blessed', color: 'red suede', imageSrc: '/assets/shoes-red.png', isFav: false }
     ]
   },
   template: `
@@ -92,7 +98,40 @@ const app = new Vue({
       <h1 class="app-title">My Closet 我的衣柜</h1>
       <items :list-title="name1" :list="purses"></items>
       <items :list-title="name2" :list="dresses"></items>
-      <items :list-title="name3" :list="shoes"></items>      
+      <items :list-title="name3" :list="shoes"></items>
+      
+      <!-- testing color thief -->
+      <div class="testing-wrapper">
+        <img id="testing-image"></img>
+        <div class="testing-color" id="testing-color"></div>
+      </div>
     </div>
   `
 })
+
+// color theif
+function setImage(path) {
+  document.getElementById('testing-image').src = path
+}
+
+function setColor(path) {
+  const sourceImage = new Image(200, 200)
+  sourceImage.src = path
+  
+  sourceImage.onload = function(e) {
+    var can = document.createElement('canvas');
+    var ctx = can.getContext("2d");
+    ctx.drawImage(this, 0, 0, this.width, this.height);
+    var imageData  = ctx.getImageData(0, 0, this.width, this.height);
+    var colorThief = new ColorThief();
+    var pal = colorThief.getPalette(can);
+    console.log(pal[5]);
+    document.getElementById("testing-color").style.backgroundColor = getColor(pal[5]);
+  };
+}
+
+function getColor (array) {
+  return "rgb(" + array[0] + "," + array[1] + "," + array[2] + ")"
+
+}
+
