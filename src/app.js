@@ -12,7 +12,7 @@ Vue.component('item', {
     }
   },
   template: `
-    <li class="item" @click="clicked(item.id)">
+    <li class="item" :class="{'item--fav': item.isFav}" @click="clicked(item.id)">
       <div class="item-fav-icon">{{ item.isFav ? "😊" : "☹️" }}</div>
       <img class="item-image" v-bind:src="item.imageSrc" alt="">
       <div>{{ item.brand }}</div>
