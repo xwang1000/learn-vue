@@ -29,7 +29,7 @@ Vue.component('items', {
       </item>
     </ul>
   `,
-  data: function () {
+  data () {
     return {
       message: 'Buy a new purse',
       purses: [
@@ -43,24 +43,23 @@ Vue.component('items', {
     }
   },
   computed: {
-    reversedMessage: function () {
+    reversedMessage () {
       return this.message.split('').reverse().join('')
     }
   },
   methods: {
-    toggleFav: function () {
+    toggleFav () {
       console.log("called toggleFav")
-    }
+    }  
   },
-  created: function () {
+  created () {
     console.log("message is: " + this.message)
   }
-
 })
 
 // <app>
 
-var app = new Vue({
+const app = new Vue({
   el: '#app',
   template: `
     <div>
