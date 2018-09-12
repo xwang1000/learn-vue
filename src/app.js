@@ -1,18 +1,49 @@
 // <swatch>
 
 Vue.component('swatch', {
+  data () {
+    return {
+      primaryColor: ""
+    }
+  },
   props: {
     item: {
       required: true,
       type: Object
     }
   },
+  watch: {
+    item () {
+      this.setPrimaryColor()
+    }
+  },
+  created () {
+    this.setPrimaryColor()
+  },
   template: `
     <div class="swatch">
-      <img id="swatch-image" :src="item.imageSrc"></img>
-      <div class="swatch-color" id="testing-color"></div>
+      <img class="swatch-image" :src="item.imageSrc"></img>
+      <div class="swatch-color" :style="{'background-color': primaryColor}"></div>
     </div>
-  `
+  `,
+  methods: {
+    setPrimaryColor () {
+      const image = new Image(200, 200)
+      image.onload = () => {
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        context.drawImage(image, 0, 0, image.width, image.height)
+        this.primaryColor = this.getPrimaryColor(canvas)
+      }
+      image.src = this.item.imageSrc
+    },
+    getPrimaryColor (canvas) {
+      const colorThief = new ColorThief()
+      const palette = colorThief.getPalette(canvas)
+      const primaryColor = palette[5]
+      return `rgb(${primaryColor[0]}, ${primaryColor[1]}, ${primaryColor[2]})`
+    }
+  }
 })
 
 // <item>
@@ -142,27 +173,3 @@ const app = new Vue({
     }
   }
 })
-
-// color thief
-function setImage(path) {
-  document.getElementById('testing-image').src = path
-}
-
-function setColor(path) {
-  const sourceImage = new Image(200, 200)
-  sourceImage.src = path
-  
-  sourceImage.onload = function(e) {
-    var can = document.createElement('canvas');
-    var ctx = can.getContext("2d");
-    ctx.drawImage(this, 0, 0, this.width, this.height);
-    var colorThief = new ColorThief();
-    var pal = colorThief.getPalette(can);
-    document.getElementById("testing-color").style.backgroundColor = getColor(pal[5]);
-  };
-}
-
-function getColor (array) {
-  return "rgb(" + array[0] + "," + array[1] + "," + array[2] + ")"
-
-}
