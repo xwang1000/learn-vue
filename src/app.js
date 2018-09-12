@@ -9,7 +9,7 @@ Vue.component('swatch', {
   },
   template: `
     <div class="testing-wrapper">
-      <img id="testing-image"></img>
+      <img id="testing-image" :src="item.imageSrc"></img>
       <div class="testing-color" id="testing-color"></div>
     </div>
   `
@@ -65,7 +65,7 @@ Vue.component('items', {
   methods: {
     toggleFav (ID, imagePath) {
       
-      //testing color theif
+      // testing color theif
       // setImage(imagePath)
       // setColor(imagePath)
       this.list.forEach((listItem) => {
