@@ -1,3 +1,14 @@
+// <swatch>
+
+Vue.component('swatch', {
+  template: `
+    <div class="testing-wrapper">
+      <img id="testing-image"></img>
+      <div class="testing-color" id="testing-color"></div>
+    </div>
+  `
+})
+
 // <item>
 
 Vue.component('item', {
@@ -99,12 +110,7 @@ const app = new Vue({
       <items :list-title="name1" :list="purses"></items>
       <items :list-title="name2" :list="dresses"></items>
       <items :list-title="name3" :list="shoes"></items>
-      
-      <!-- testing color thief -->
-      <div class="testing-wrapper">
-        <img id="testing-image"></img>
-        <div class="testing-color" id="testing-color"></div>
-      </div>
+      <swatch></swatch>
     </div>
   `
 })
@@ -122,10 +128,8 @@ function setColor(path) {
     var can = document.createElement('canvas');
     var ctx = can.getContext("2d");
     ctx.drawImage(this, 0, 0, this.width, this.height);
-    var imageData  = ctx.getImageData(0, 0, this.width, this.height);
     var colorThief = new ColorThief();
     var pal = colorThief.getPalette(can);
-    console.log(pal[5]);
     document.getElementById("testing-color").style.backgroundColor = getColor(pal[5]);
   };
 }

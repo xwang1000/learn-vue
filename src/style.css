@@ -58,7 +58,7 @@ body {
 
 .item:hover {
   cursor: pointer;
-  /* transform: scale(1.03); */
+  transform: scale(1.03);
   transition: transform 0.1s ease;
 }
 
