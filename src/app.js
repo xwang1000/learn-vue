@@ -83,7 +83,7 @@ const app = new Vue({
       // 1st list
       { 
         id: 0,
-        listTitle: "PURSES 包包",
+        title: "PURSES 包包",
         items: [
           { id: 0, brand: 'Bao Bao', color: 'Classic Silver', imageSrc: '/assets/issey.jpeg', isFav: true},
           { id: 1, brand: 'Longchamp', color: 'Grass Khaki', imageSrc: '/assets/longchamp.jpeg', isFav: false },
@@ -96,7 +96,7 @@ const app = new Vue({
       // 2nd list
       { 
         id: 1,
-        listTitle: "DRESSES 裙子",
+        title: "DRESSES 裙子",
         items: [
           { id: 0, brand: 'Valentino', color: 'lace white', imageSrc: '/assets/dress-white.png', isFav: true},
           { id: 1, brand: 'Christian Dior', color: 'royal blue', imageSrc: '/assets/dress-blue.png', isFav: false },
@@ -109,7 +109,7 @@ const app = new Vue({
       // 3rd list
       { 
         id: 2,
-        listTitle: "SHOES 鞋子",
+        title: "SHOES 鞋子",
         items: [
           { id: 0, brand: 'Fendi', color: 'white carrson', imageSrc: '/assets/shoes-white.png', isFav: true},
           { id: 1, brand: 'Steve Madden', color: 'royal blue', imageSrc: '/assets/shoes-blue.png', isFav: false },
@@ -126,11 +126,11 @@ const app = new Vue({
     <div>
       <h1 class="app-title">My Closet 我的衣柜</h1>
       <items
-      v-for="list in lists"
-      :key = "list.id"
-      :list-title="list.listTitle"
-      :list="list.items"
-      :item-selected="itemSelected"
+        v-for="list in lists"
+        :key = "list.id"
+        :list-title="list.title"
+        :list="list.items"
+        :item-selected="itemSelected"
       >
       </items>
       <swatch v-if="selectedItem != null" :item="selectedItem"></swatch>
@@ -166,4 +166,3 @@ function getColor (array) {
   return "rgb(" + array[0] + "," + array[1] + "," + array[2] + ")"
 
 }
-
