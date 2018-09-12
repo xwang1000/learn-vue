@@ -44,7 +44,8 @@ Vue.component('item', {
 Vue.component('items', {
   props: {
     listTitle: String,
-    list: Array
+    list: Array,
+    itemSelected: Function
   },
   template: `
     <div>
@@ -65,12 +66,13 @@ Vue.component('items', {
     toggleFav (ID, imagePath) {
       
       //testing color theif
-      setImage(imagePath)
-      setColor(imagePath)
-
+      // setImage(imagePath)
+      // setColor(imagePath)
       this.list.forEach((listItem) => {
         if (listItem.id === ID) {
           listItem.isFav = !listItem.isFav
+          this.itemSelected(listItem) // pass the clicked item to parent
+          console.log(listItem)
         }
       })
     }
@@ -114,12 +116,17 @@ const app = new Vue({
   template: `
     <div>
       <h1 class="app-title">My Closet 我的衣柜</h1>
-      <items :list-title="name1" :list="purses"></items>
-      <items :list-title="name2" :list="dresses"></items>
-      <items :list-title="name3" :list="shoes"></items>
+      <items :list-title="name1" :list="purses" :item-selected="itemSelected"></items>
+      <items :list-title="name2" :list="dresses" :item-selected="itemSelected"></items>
+      <items :list-title="name3" :list="shoes" :item-selected="itemSelected"></items>
       <swatch v-if="selectedItem != null" :item="selectedItem"></swatch>
     </div>
-  `
+  `,
+  methods: {
+    itemSelected (item) {
+      this.selectedItem = item
+    }
+  }
 })
 
 // color thief
