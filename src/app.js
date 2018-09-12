@@ -1,6 +1,12 @@
 // <swatch>
 
 Vue.component('swatch', {
+  props: {
+    item: {
+      required: true,
+      type: Object
+    }
+  },
   template: `
     <div class="testing-wrapper">
       <img id="testing-image"></img>
@@ -102,7 +108,8 @@ const app = new Vue({
       { id: 3, brand: 'Guess', color: 'Dangerous pump', imageSrc: '/assets/shoes-dangerous.png', isFav: true },
       { id: 4, brand: 'Gucci', color: 'pink feather', imageSrc: '/assets/shoes-fefe.png', isFav: false },
       { id: 5, brand: 'Blessed', color: 'red suede', imageSrc: '/assets/shoes-red.png', isFav: false }
-    ]
+    ],
+    selectedItem: null
   },
   template: `
     <div>
@@ -110,12 +117,12 @@ const app = new Vue({
       <items :list-title="name1" :list="purses"></items>
       <items :list-title="name2" :list="dresses"></items>
       <items :list-title="name3" :list="shoes"></items>
-      <swatch></swatch>
+      <swatch v-if="selectedItem != null" :item="selectedItem"></swatch>
     </div>
   `
 })
 
-// color theif
+// color thief
 function setImage(path) {
   document.getElementById('testing-image').src = path
 }
