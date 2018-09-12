@@ -8,9 +8,9 @@ Vue.component('swatch', {
     }
   },
   template: `
-    <div class="testing-wrapper">
-      <img id="testing-image" :src="item.imageSrc"></img>
-      <div class="testing-color" id="testing-color"></div>
+    <div class="swatch">
+      <img id="swatch-image" :src="item.imageSrc"></img>
+      <div class="swatch-color" id="testing-color"></div>
     </div>
   `
 })
@@ -63,16 +63,11 @@ Vue.component('items', {
     </div>
   `,
   methods: {
-    toggleFav (ID, imagePath) {
-      
-      // testing color theif
-      // setImage(imagePath)
-      // setColor(imagePath)
+    toggleFav (ID) {
       this.list.forEach((listItem) => {
         if (listItem.id === ID) {
           listItem.isFav = !listItem.isFav
           this.itemSelected(listItem) // pass the clicked item to parent
-          console.log(listItem)
         }
       })
     }
@@ -84,41 +79,60 @@ Vue.component('items', {
 const app = new Vue({
   el: '#app',
   data: {
-    name1: "PURSES 包包",
-    name2: "DRESSES 裙子",
-    name3: "SHOES 鞋子",
-    purses: [
-      { id: 0, brand: 'Bao Bao', color: 'Classic Silver', imageSrc: '/assets/issey.jpeg', isFav: true},
-      { id: 1, brand: 'Longchamp', color: 'Grass Khaki', imageSrc: '/assets/longchamp.jpeg', isFav: false },
-      { id: 2, brand: 'Coach', color: 'Lychee Black', imageSrc: '/assets/coach.jpeg', isFav: true },
-      { id: 3, brand: 'Louis Vuitton', color: 'Shiny Nude', imageSrc: '/assets/alma.jpeg', isFav: true },
-      { id: 4, brand: 'Chanel', color: 'Black Fabric', imageSrc: '/assets/leboy.png', isFav: false },
-      { id: 5, brand: 'Louis Vuitton', color: 'Pink', imageSrc: '/assets/girolata.png', isFav: false }
-    ],
-    dresses: [
-      { id: 0, brand: 'Valentino', color: 'lace white', imageSrc: '/assets/dress-white.png', isFav: true},
-      { id: 1, brand: 'Christian Dior', color: 'royal blue', imageSrc: '/assets/dress-blue.png', isFav: false },
-      { id: 2, brand: 'Chanel', color: 'dance black', imageSrc: '/assets/dress-black.png', isFav: true },
-      { id: 3, brand: 'Zara', color: 'indian red', imageSrc: '/assets/dress-red.png', isFav: true },
-      { id: 4, brand: 'H&M', color: 'bling bling', imageSrc: '/assets/dress-bling.png', isFav: false },
-      { id: 5, brand: 'Aritzia', color: 'playful yellow', imageSrc: '/assets/dress-yellow.png', isFav: false }
-    ],
-    shoes: [
-      { id: 0, brand: 'Fendi', color: 'white carrson', imageSrc: '/assets/shoes-white.png', isFav: true},
-      { id: 1, brand: 'Steve Madden', color: 'royal blue', imageSrc: '/assets/shoes-blue.png', isFav: false },
-      { id: 2, brand: 'Forever 21', color: 'Kim Kardashian', imageSrc: '/assets/shoes-kim.png', isFav: true },
-      { id: 3, brand: 'Guess', color: 'Dangerous pump', imageSrc: '/assets/shoes-dangerous.png', isFav: true },
-      { id: 4, brand: 'Gucci', color: 'pink feather', imageSrc: '/assets/shoes-fefe.png', isFav: false },
-      { id: 5, brand: 'Blessed', color: 'red suede', imageSrc: '/assets/shoes-red.png', isFav: false }
+    lists: [
+      // 1st list
+      { 
+        id: 0,
+        listTitle: "PURSES 包包",
+        items: [
+          { id: 0, brand: 'Bao Bao', color: 'Classic Silver', imageSrc: '/assets/issey.jpeg', isFav: true},
+          { id: 1, brand: 'Longchamp', color: 'Grass Khaki', imageSrc: '/assets/longchamp.jpeg', isFav: false },
+          { id: 2, brand: 'Coach', color: 'Lychee Black', imageSrc: '/assets/coach.jpeg', isFav: true },
+          { id: 3, brand: 'Louis Vuitton', color: 'Shiny Nude', imageSrc: '/assets/alma.jpeg', isFav: true },
+          { id: 4, brand: 'Chanel', color: 'Black Fabric', imageSrc: '/assets/leboy.png', isFav: false },
+          { id: 5, brand: 'Louis Vuitton', color: 'Pink', imageSrc: '/assets/girolata.png', isFav: false }
+        ]
+      },
+      // 2nd list
+      { 
+        id: 1,
+        listTitle: "DRESSES 裙子",
+        items: [
+          { id: 0, brand: 'Valentino', color: 'lace white', imageSrc: '/assets/dress-white.png', isFav: true},
+          { id: 1, brand: 'Christian Dior', color: 'royal blue', imageSrc: '/assets/dress-blue.png', isFav: false },
+          { id: 2, brand: 'Chanel', color: 'dance black', imageSrc: '/assets/dress-black.png', isFav: true },
+          { id: 3, brand: 'Zara', color: 'indian red', imageSrc: '/assets/dress-red.png', isFav: true },
+          { id: 4, brand: 'H&M', color: 'bling bling', imageSrc: '/assets/dress-bling.png', isFav: false },
+          { id: 5, brand: 'Aritzia', color: 'playful yellow', imageSrc: '/assets/dress-yellow.png', isFav: false }
+        ],
+      },
+      // 3rd list
+      { 
+        id: 2,
+        listTitle: "SHOES 鞋子",
+        items: [
+          { id: 0, brand: 'Fendi', color: 'white carrson', imageSrc: '/assets/shoes-white.png', isFav: true},
+          { id: 1, brand: 'Steve Madden', color: 'royal blue', imageSrc: '/assets/shoes-blue.png', isFav: false },
+          { id: 2, brand: 'Forever 21', color: 'Kim Kardashian', imageSrc: '/assets/shoes-kim.png', isFav: true },
+          { id: 3, brand: 'Guess', color: 'Dangerous pump', imageSrc: '/assets/shoes-dangerous.png', isFav: true },
+          { id: 4, brand: 'Gucci', color: 'pink feather', imageSrc: '/assets/shoes-fefe.png', isFav: false },
+          { id: 5, brand: 'Blessed', color: 'red suede', imageSrc: '/assets/shoes-red.png', isFav: false }
+        ],
+      }
     ],
     selectedItem: null
   },
   template: `
     <div>
       <h1 class="app-title">My Closet 我的衣柜</h1>
-      <items :list-title="name1" :list="purses" :item-selected="itemSelected"></items>
-      <items :list-title="name2" :list="dresses" :item-selected="itemSelected"></items>
-      <items :list-title="name3" :list="shoes" :item-selected="itemSelected"></items>
+      <items
+      v-for="list in lists"
+      :key = "list.id"
+      :list-title="list.listTitle"
+      :list="list.items"
+      :item-selected="itemSelected"
+      >
+      </items>
       <swatch v-if="selectedItem != null" :item="selectedItem"></swatch>
     </div>
   `,
