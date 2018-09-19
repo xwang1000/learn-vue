@@ -1,3 +1,29 @@
+// <outfit-generator> 
+// takes an array of item lists
+// go through each list and pick a random item, 
+// put them together to display
+
+Vue.component('outfit-generator', {
+  props: {
+    itemLists: {
+      required: true,
+      type: Array
+    }
+  },
+  computed: {
+    randomItem () {
+      return "baobao"
+    }
+  },
+  template: `
+    <div class="outfit-generator">
+      <div class="outfit-generator--title">outfit generator</div>
+      <div class="outfit-generator--view">{{ randomItem }}</div>
+      <button class="outfit-generator--button-generate">Generate an outfit</button>
+    </div>
+  `
+})
+
 // <swatch>
 
 Vue.component('swatch', {
@@ -155,6 +181,7 @@ const app = new Vue({
   },
   template: `
     <div>
+      <outfit-generator :item-lists="lists"></outfit-generator>
       <h1 class="app-title">My Closet 我的衣柜</h1>
       <items
         v-for="list in lists"

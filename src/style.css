@@ -12,6 +12,24 @@ body {
   margin: 20px;
 }
 
+.outfit-generator {
+  background-color: lightpink;
+  border-radius: 5px;
+  height: 75vh;
+  width: 75%;
+  position: fixed;
+  left: 50%;
+  margin-left: -37.5%;
+  margin-top: 50px;
+  padding: 10px;
+  text-align: center;
+}
+
+.outfit-generator--title {
+  text-transform: capitalize;
+  text-align: center;
+}
+
 .list-title {
   text-align: center;
   margin: 0;
