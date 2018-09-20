@@ -13,8 +13,9 @@ body {
 }
 
 .outfit-generator {
-  background-color: lightpink;
+  background-color: white;
   border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
   height: 75vh;
   width: 75%;
   position: fixed;
@@ -28,7 +29,29 @@ body {
 .outfit-generator--title {
   text-transform: capitalize;
   text-align: center;
+  margin: 20px;
 }
+/* 
+.outfit-generator--image-wrapper {
+  display: flex;
+}
+
+.outfit-generator--image-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.outfit-generator--image-small {
+  width: 100px;
+  height: auto;
+  flex: 1;
+}
+
+.outfit-generator--image-large {
+  width: 200px;
+  height: auto;
+} */
 
 .list-title {
   text-align: center;

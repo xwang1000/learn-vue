@@ -10,15 +10,37 @@ Vue.component('outfit-generator', {
       type: Array
     }
   },
+  data () {
+    return {
+      currentList: {}
+    }
+  },
   computed: {
     randomItem () {
-      return "baobao"
+      return this.itemLists[0].items[0]
+    },
+    outfitList () {
+      const outfitArray = []
+      this.itemLists.forEach( (itemList) => {
+        outfitArray.push(itemList.items[getRandomNum()])
+      })
+      return outfitArray
     }
   },
   template: `
     <div class="outfit-generator">
       <div class="outfit-generator--title">outfit generator</div>
-      <div class="outfit-generator--view">{{ randomItem }}</div>
+
+      <div class="outfit-generator--image-wrapper">
+        <div class="outfit-generator--image-column">
+          <img class="outfit-generator--image-small" :src="outfitList[0].imageSrc""></img> 
+          <img class="outfit-generator--image-small" :src="outfitList[2].imageSrc""></img>
+        </div>
+        <div class="outfit-generator--image-column">
+          <img class="outfit-generator--image-large" :src="outfitList[1].imageSrc""></img>
+        </div>
+      </div>
+      
       <button class="outfit-generator--button-generate">Generate an outfit</button>
     </div>
   `
@@ -89,7 +111,7 @@ Vue.component('item', {
     <!-- testing color thief -->
     <li class="item" :class="{'item--fav': item.isFav}" @click="clicked(item.id, item.imageSrc)">
       <div class="item-fav-icon">{{ item.isFav ? "😊" : "☹️" }}</div>
-      <img class="item-image" v-bind:src="item.imageSrc" alt="">
+      <img class="item-image" :src="item.imageSrc" alt="">
       <div>{{ item.brand }}</div>
       <div class="item-color">{{ item.color }}</div>
     </li>
@@ -200,3 +222,10 @@ const app = new Vue({
     }
   }
 })
+
+
+function getRandomNum () {
+  let n = (Math.floor(Math.random() * (5 - 0 + 1)) + 0)
+  console.log(n)
+  return n
+}
